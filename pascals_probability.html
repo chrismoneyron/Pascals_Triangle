@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src = "jquery-1.12.4.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "pascals_probability_style.css">
+	<title>Probability</title>
+</head>
+<body>
+	<h2>Pascal's Triangle</h2>
+	<div class = "main_container">
+		<img id = "background" src = "triangle_background1.png" height = "100%" width = "100%">
+		<nav>
+			<ul>
+				<li><a href = "pascals.html">Home</a></li>
+				<li><a href = "pascals_triangle.html">Triangle</a></li>
+				<li><a href = "pascals_probability.html">Probability</a></li>
+			</ul>
+		</nav>
+		<section>
+			<h1>Pascal's Probability</h1>
+			<p>Please fill in the values below:</p>
+			<p>
+				P (
+				<input id = "element1" placeholder="Index 1">
+
+				<select id = "condition">
+					<option disabled selected>Condition</option>
+					<option value = "none">(none)</option>
+					<option value = "and">&cap;</option>
+					<option value = "or">&cup;</option>
+				</select>
+
+				<input id = "element2" placeholder="Index 2">
+				) with depth =
+				<input id = "depth" placeholder = "depth">
+				<p><button id = "button" type = "button">GO!</button></p>
+			</p>
+
+			<p id = "probability"></p>
+		</section>
+	</div>
+	<p class = "page_bottom">Webiste by: Chris Moneyron</p>
+</body>
+
+<script src = "sumElements.js"></script>
+<script src = "create_pascals_triangle.js"></script>
+<script src = "calculate_probability.js"></script>
+<script src = "is_probability_error.js"></script>
+<script>
+$("#button").click(function display_probability() {
+	var depth = $("#depth").val();
+	var element1 = $("#element1").val();
+	var element2 = $("#element2").val();
+	var condition = $("#condition").val();
+
+	error = is_probability_error(condition, element1, element2, depth);
+	if (error == true) {
+		return;
+	}
+
+	var row = create_pascals_triangle(depth)
+	var probability = calculate_probability(row, element1, element2, condition);
+
+	$("#probability").html("Probability: " + probability);
+})
+</script>
+</html>

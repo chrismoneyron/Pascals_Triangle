@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src = "jquery-1.12.4.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "pascals_probability_style.css">
+	<title>Triangle</title>
+</head>
+<body>
+	<h2>Pascal's Triangle</h2>
+	<div class = "main_container">
+		<img id = "background" src = "triangle_background1.png" height = "100%" width = "100%">
+		<nav>
+			<ul>
+				<li><a href = "pascals.html">Home</a></li>
+				<li><a href = "pascals_triangle.html">Triangle</a></li>
+				<li><a href = "pascals_probability.html">Probability</a></li>
+			</ul>
+		</nav>
+		<section>
+			<h1>Pascal's Triangle</h1>
+			<img class = "left_images" src = "pascal.jpg">
+			<p>
+				Enter depth of triangle:
+				<div class = "tooltip">
+					<input id = "depth">
+					<span class = "tooltiptext">The first row has a depth of 0</span>
+				</div>
+				<p><button id = "button" type = "button">Show Rows</button></p>
+				<div class = "centering_container">
+					<p id = "pascals_visual"></p>
+					<p id = "last_row"></p>
+				</div>
+			</p>
+		</section>
+	</div>
+	<p class = "page_bottom">Webiste by: Chris Moneyron</p>
+</body>
+
+<script src = "create_pascals_triangle.js"></script>
+<script src = "blink.js"></script>
+<script>
+$("#button").click(function display_row() {
+	$("#pascals_visual").html(null);
+	$("#last_row").html(null);
+
+	var depth = $("#depth").val();
+
+	if (isNaN(depth) || depth == "") {
+		alert("Please enter a valid depth");
+		return;
+	}
+
+	var row, i, prob_row;
+
+	for (i = 0; i <= depth; i++) {
+
+		row = create_pascals_triangle(i);
+		$("#pascals_visual").append("<br>" + row.join("&nbsp&nbsp&nbsp"));
+
+		if (i == depth) {
+			$("#last_row").html("Depth " + depth + " --> " + row.join("&nbsp&nbsp&nbsp"));
+			blink("#last_row", "fast", 3);
+		}
+
+	}
+})
+</script>
+
+</html>
